@@ -1,0 +1,43 @@
+<h1>Characters</h1>
+<mat-divider></mat-divider>
+<br>
+
+<mat-grid-list cols="1" *ngIf="!characters; else seeCharacter">
+    <mat-spinner></mat-spinner>
+</mat-grid-list>
+
+<ng-template #seeCharacter>
+    <div 
+        fxLayout="row wrap" 
+        fxLayoutAlign="center" 
+        fxLayoutGap="20px"
+        fxLayout.xs="column"
+    >
+    <div 
+        fxFlex="20" 
+        fxFlex.lg="25" 
+        fxFlex.sm="30" 
+        *ngFor="let character of characters"
+    >
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{ character.name }}</mat-card-title>
+            </mat-card-header>
+        
+            <img class="image-character" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" [alt]="character.name">
+        
+            <mat-card-actions>
+                <mat-card-content>
+                    <p>{{ character.modified | date }}</p>
+                </mat-card-content>
+                <button 
+                    [routerLink]="['/character', character.id]"
+                    mat-button color="warn"
+                >
+                    More Info...
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+</ng-template>

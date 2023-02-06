@@ -1,0 +1,8 @@
+<div>
+    <h2 class="title">Stories</h2>
+    <ul>
+        <li *ngFor="let item of stories; let i = index">
+            <strong> Story {{i + 1 }} - </strong> {{ item.originalIssue.name }}
+        </li>
+    </ul>
+</div>

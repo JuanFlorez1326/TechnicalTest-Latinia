@@ -1,0 +1,86 @@
+<mat-grid-list cols="1" *ngIf="!character; else detailedCharacter">
+    <mat-spinner></mat-spinner>
+</mat-grid-list>
+
+<ng-template #detailedCharacter >
+    <div 
+        fxLayout="row"
+        fxLayout.xs="colum"
+        fxLayout.sm="column"
+        *ngFor="let item of character"
+        class="container-character"
+    >
+
+        <div fxFlex="50" class="card-character">
+            <h1 class="name-character"> {{ item.name }} </h1>
+            <mat-divider></mat-divider>
+            <br>
+
+            <div class="container-image">
+                <img
+                    class="img-character"
+                    [src]="item.thumbnail.path + '.' + item.thumbnail.extension"
+                    [alt]="item.name"
+                >
+            </div>
+        </div>
+
+        <div fxFlex="50">
+            <h1 class="info-character">Information</h1>
+            <mat-divider></mat-divider>
+            <br>
+
+            <div class="container-info-character">
+                <div class="container-date">
+                    <h2>Date</h2>
+                    <ul>
+                        <li>
+                            <strong>Last Modification - </strong> {{ item.modified | date }}
+                        </li>
+                    </ul>
+                </div>
+    
+                <div class="container-description">
+                    <h2>Description</h2>
+                    
+                    <div *ngIf="!item.description; else description">
+                        <ul>
+                            <li>
+                                The character {{ item.name }} currently has no description.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <ng-template #description>
+                        <ul>
+                            <li>{{ item.description }}</li>
+                        </ul>
+                    </ng-template>
+                </div>
+    
+                <div class="container-stories">
+                    <app-stories></app-stories>
+                </div>
+    
+                <div class="container-btn-goBack">
+                    <button 
+                        [routerLink]="['/']"
+                        mat-button color="warn" 
+                    >
+                        Go Home
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container-divider">
+        <mat-divider></mat-divider>
+    </div>
+    <div class="comics-container">
+        <div>
+            <app-comics></app-comics>
+        </div>
+    </div>
+</ng-template>

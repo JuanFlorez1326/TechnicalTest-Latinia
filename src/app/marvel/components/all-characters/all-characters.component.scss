@@ -1,0 +1,27 @@
+mat-card{
+    margin-top:20px;
+    mat-card-header {
+        height:10vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        mat-card-title{
+            font-size: 1.1rem;
+        }
+    }
+    mat-card-actions {
+        display:flex;
+        justify-content:space-between;
+        mat-card-content{
+            padding-bottom:12px;
+            display:flex;
+            font-weight: bold;
+            font-size: .9rem;
+        }
+    }
+}
+.image-character{
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+}
