@@ -46,8 +46,8 @@ export class MarvelService {
     return this.http.get<Stories>(url);
   }
 
-  getSuggestions( term: string ): Observable<Character> {
-    const url = `${api.url}?nameStartsWith=${term}&orderBy=name&ts=1&apikey=${api.key}&hash=${api.hash}&limit=10`;
+  getSuggestions( term: string, limit: string ): Observable<Character> {
+    const url = `${api.url}?nameStartsWith=${term}&orderBy=name&ts=1&apikey=${api.key}&hash=${api.hash}&limit=${limit}`;
     return this.http.get<Character>(url);
   }
 }
