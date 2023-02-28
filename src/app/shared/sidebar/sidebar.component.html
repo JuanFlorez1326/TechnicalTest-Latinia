@@ -12,7 +12,7 @@
         <mat-nav-list>
 
             <a
-                routerLink="/character"
+                routerLink="/marvel/character"
                 mat-list-item
                 (click)="sidenav.toggle()"
             >
@@ -20,7 +20,7 @@
             </a>
 
             <a
-                routerLink="/"
+                routerLink="/marvel"
                 mat-list-item
                 (click)="sidenav.toggle()"
             >
@@ -34,7 +34,7 @@
         <button mat-icon-button (click)="sidenav.toggle()" >
             <mat-icon>menu</mat-icon>
         </button>
-        <button [routerLink]="['/']" mat-button>
+        <button [routerLink]="['/marvel']" mat-button>
             Marvel
         </button>
     </mat-toolbar>

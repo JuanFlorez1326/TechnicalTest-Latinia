@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MarvelModule } from './marvel/marvel.module';
 import { SharedModule } from './shared/shared.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SharedModule } from './shared/shared.module';
     HttpClientModule,
     MarvelModule,
     SharedModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StoreModule.forRoot({}, {})
   ],
   bootstrap: [
     AppComponent

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from './material/material.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
