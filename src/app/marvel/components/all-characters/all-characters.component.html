@@ -7,16 +7,11 @@
 </mat-grid-list>
 
 <ng-template #seeCharacter>
-    <div 
-        fxLayout="row wrap" 
-        fxLayoutAlign="center" 
-        fxLayoutGap="20px"
-        fxLayout.xs="column"
+    <div
+        class="container"
     >
-    <div 
-        fxFlex="20" 
-        fxFlex.lg="25" 
-        fxFlex.sm="30" 
+    <div
+        class="card-character"
         *ngFor="let character of characters"
     >
         <mat-card>
