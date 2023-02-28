@@ -7,7 +7,7 @@ import { Character, ResultCharacter } from '../../interfaces/characters.interfac
 @Component({
   selector: 'app-search-input',
   templateUrl: './search-input.component.html',
-  styles: [ ` app-search-results { display: flex; margin: auto; } `]
+  styleUrls: ['./search-input.component.scss']
 })
 export class SearchInputComponent {
 

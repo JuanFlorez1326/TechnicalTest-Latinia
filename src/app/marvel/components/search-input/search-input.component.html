@@ -1,38 +1,34 @@
-<div fxLayout="column">
-    <div>
-        <h1>Character finder</h1>
-        <mat-divider></mat-divider><br>
-    </div>
-    <div fxLayout="column">
-        <mat-form-field>
-            <mat-label>
-                Character
-            </mat-label>
-                <input 
-                    type="text"
-                    placeholder="Example: Thor"
-                    matInput
-                    [matAutocomplete]="auto"
-                    [(ngModel)]="term"
-                    (input)="searchCharacters()"
-                >
-            <mat-autocomplete 
-                autoActiveFirstOption 
-                #auto="matAutocomplete"
-                (optionSelected)="selectedOption( $event )"
-            >
-                <mat-option *ngFor="let character of characters" [value]="character">
-                    {{character.name}}
-                </mat-option>
+<h1>Character finder</h1>
+<mat-divider></mat-divider><br>
 
-                <mat-option value="" *ngIf="characters.length === 0 && term.length > 0">
-                    Nothing was found for the term {{ term }}.
-                </mat-option>
-            </mat-autocomplete>
-        </mat-form-field>
-    </div>
+<mat-form-field>
+    <mat-label>
+        Character...
+    </mat-label>
+    <input
+        class="search-input"
+        type="text"
+        placeholder="Example: Thor"
+        matInput
+        [matAutocomplete]="auto"
+        [(ngModel)]="term"
+        (input)="searchCharacters()"
+    >
+    <mat-autocomplete 
+        autoActiveFirstOption 
+        #auto="matAutocomplete"
+        (optionSelected)="selectedOption( $event )"
+    >
+        <!--<mat-option *ngFor="let character of characters" [value]="character">
+            {{character.name}}
+        </mat-option>-->
 
-    <app-search-results
-        [result]="selectedCharacter"
-    ></app-search-results>
-</div>
+        <mat-option value="" *ngIf="characters.length === 0 && term.length > 0">
+            Nothing was found for the term {{ term }}.
+        </mat-option>
+    </mat-autocomplete>
+</mat-form-field>
+
+<app-search-results
+    [result]="characters"
+></app-search-results>
