@@ -17,11 +17,15 @@ export class SearchInputComponent {
   
   term: string = '';
   characters: ResultCharacter[] = [];
-  limit: string = '2';
+  limit: string ='2';
 
-  searchCharacters() {
-    this.marvelService.getSuggestions(this.term, this.limit)
-    .pipe( map( (res: Character) => res.data.results ) )
-    .subscribe( characters => this.characters = characters );
+  searchCharacters( name: string) {
+    if ( name && name.length > 0 ) {
+      this.marvelService.getSuggestions(this.term, this.limit)
+      .pipe( map( (res: Character) => res.data.results ) )
+      .subscribe( characters => this.characters = characters );
+    } else {
+      this.characters = [];
+    }
   }
 }

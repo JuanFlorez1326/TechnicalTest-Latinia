@@ -8,11 +8,12 @@
         </mat-label>
         <input
             type="text"
+            #name
             placeholder="Example: Thor"
             matInput
             [matAutocomplete]="auto"
             [(ngModel)]="term"
-            (input)="searchCharacters()"
+            (input)="searchCharacters( name.value)"
         >
         <mat-autocomplete 
             autoActiveFirstOption 
@@ -33,7 +34,7 @@
             placeholder="Example: 4"
             matInput
             [matAutocomplete]="auto"
-            (input)="searchCharacters()"
+            (input)="searchCharacters( name.value )"
             [(ngModel)]="limit"
         >
         <mat-autocomplete 

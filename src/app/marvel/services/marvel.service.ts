@@ -15,11 +15,6 @@ export class MarvelService {
   constructor( 
     private readonly http: HttpClient 
   ) {}
-  
-  searchCharacter( character: string ): Observable<Character> {
-    const url = `${api.url}?name=${character}&ts=1&apikey=${api.key}&hash=${api.hash}`;
-    return this.http.get<Character>(url);
-  }
 
   getAllCharacters(): Observable<Character> {
     const url = `${api.url}?ts=1&apikey=${api.key}&hash=${api.hash}`;
@@ -47,7 +42,7 @@ export class MarvelService {
   }
 
   getSuggestions( term: string, limit: string ): Observable<Character> {
-    const url = `${api.url}?nameStartsWith=${term}&orderBy=name&ts=1&apikey=${api.key}&hash=${api.hash}&limit=${limit}`;
+    const url = `${api.url}?orderBy=name&ts=1&apikey=${api.key}&hash=${api.hash}&nameStartsWith=${term}&limit=${limit}`;
     return this.http.get<Character>(url);
   }
 }
