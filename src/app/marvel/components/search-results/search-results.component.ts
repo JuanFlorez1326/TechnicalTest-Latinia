@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ResultCharacter } from '../../interfaces/characters.interface';
 
 @Component({
   selector: 'app-search-results',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./search-results.component.scss']
 })
 export class SearchResultsComponent {
-  @Input('result') characters: any  = '';
+  @Input('card') characters!: ResultCharacter[]
 }

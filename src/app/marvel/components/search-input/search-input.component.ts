@@ -1,5 +1,4 @@
 import { Component} from '@angular/core';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 
 import { MarvelService } from '../../services/marvel.service';
 import { Character, ResultCharacter } from '../../interfaces/characters.interface';
