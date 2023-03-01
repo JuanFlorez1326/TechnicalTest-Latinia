@@ -11,10 +11,6 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'character',
-    component: AllCharactersComponent
-  },
-  {
     path: 'character/:id',
     component: SeeCharactersComponent
   },

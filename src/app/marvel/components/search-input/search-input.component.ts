@@ -2,6 +2,7 @@ import { Component} from '@angular/core';
 
 import { MarvelService } from '../../services/marvel.service';
 import { Character, ResultCharacter } from '../../interfaces/characters.interface';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-search-input',
@@ -20,10 +21,7 @@ export class SearchInputComponent {
 
   searchCharacters() {
     this.marvelService.getSuggestions(this.term, this.limit)
-      .subscribe(
-        (res: Character) => {
-          this.characters = res.data.results;
-        }
-      );
+    .pipe( map( (res: Character) => res.data.results ) )
+    .subscribe( characters => this.characters = characters );
   }
 }

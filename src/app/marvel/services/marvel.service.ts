@@ -22,7 +22,7 @@ export class MarvelService {
   }
 
   getAllCharacters(): Observable<Character> {
-    const url = `${api.url}?limit=29&ts=1&apikey=${api.key}&hash=${api.hash}`;
+    const url = `${api.url}?ts=1&apikey=${api.key}&hash=${api.hash}`;
     return this.http.get<Character>(url);
   }
 

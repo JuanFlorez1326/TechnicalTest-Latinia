@@ -1,13 +1,7 @@
-<h1>Characters</h1>
-<mat-divider></mat-divider>
-<br>
-
 <mat-grid-list cols="1" *ngIf="!characters; else seeCharacter">
     <mat-spinner></mat-spinner>
 </mat-grid-list>
 
 <ng-template #seeCharacter>
-    <app-search-results
-        [card]="characters"
-    ></app-search-results>
+    <app-search-results [card]="characters"></app-search-results>
 </ng-template>
