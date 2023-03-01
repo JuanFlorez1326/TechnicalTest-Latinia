@@ -8,7 +8,6 @@
     </div>
     <div 
         class="container-formats"
-        fxLayout.sm="row wrap"
     >
         <button
             mat-button color="warn"
@@ -21,9 +20,7 @@
     </div>
     <div class="container">
         <div 
-            fxFlex="30" 
-            fxFlex.lg="30" 
-            fxFlex.sm="45" 
+            class="card-comic"
             *ngFor="let comic of comics"
         >
             <mat-card>

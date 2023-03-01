@@ -37,7 +37,6 @@ export class ComicsComponent implements OnInit {
   filterByFormat( format: string ) {
     if ( format === this.formatActive ) { return; }
     this.formatActive = format;
-    this.comics = []
 
     this.activatedRoute.params
     .pipe<Comic> (

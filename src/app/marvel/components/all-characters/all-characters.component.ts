@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { map } from 'rxjs';
 import { Character, ResultCharacter } from '../../interfaces/characters.interface';
 import { MarvelService } from '../../services/marvel.service';
 
 @Component({
   selector: 'app-all-characters',
-  templateUrl: './all-characters.component.html',
-  styleUrls: ['./all-characters.component.scss']
+  templateUrl: './all-characters.component.html'
 })
 export class AllCharactersComponent implements OnInit {
 
@@ -17,10 +17,7 @@ export class AllCharactersComponent implements OnInit {
 
   ngOnInit(): void {
     this.marvelService.getAllCharacters()
-    .subscribe(
-      ( res: Character ) => {
-        this.characters = res.data.results;
-      }
-    )
+    .pipe( map( (res: Character) => res.data.results ) )
+    .subscribe( characters => this.characters = characters );
   }
 }

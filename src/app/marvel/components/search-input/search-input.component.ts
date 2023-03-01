@@ -1,52 +1,27 @@
 import { Component} from '@angular/core';
-import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 
 import { MarvelService } from '../../services/marvel.service';
 import { Character, ResultCharacter } from '../../interfaces/characters.interface';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-search-input',
   templateUrl: './search-input.component.html',
-  styles: [ ` app-search-results { display: flex; margin: auto; } `]
+  styleUrls: ['./search-input.component.scss']
 })
 export class SearchInputComponent {
 
   constructor(
     private readonly marvelService: MarvelService
-  ) { 
-    if( localStorage.getItem('lastCharacter') ) {
-      this.selectedCharacter = JSON.parse( localStorage.getItem('lastCharacter')! );
-    }
-  }
+  ) {}
   
   term: string = '';
   characters: ResultCharacter[] = [];
-  selectedCharacter!: ResultCharacter[] | undefined;
+  limit: string = '2';
 
   searchCharacters() {
-    this.marvelService.getSuggestions(this.term)
-      .subscribe( 
-        (res: Character ) => {
-          this.characters = res.data.results;
-        }
-      );
-  }
-
-  selectedOption( event: MatAutocompleteSelectedEvent ) {
-
-    if( !event.option.value ) { 
-      this.selectedCharacter = undefined;
-      return; 
-    }
-    
-    const character = event.option.value;
-    this.term = character.name;
-
-    this.marvelService.getCharacterById(character.id)
-      .subscribe( ( res: Character ) => {
-        this.selectedCharacter = res.data.results;
-        localStorage.setItem('lastCharacter', JSON.stringify(this.selectedCharacter));
-      }
-    );
+    this.marvelService.getSuggestions(this.term, this.limit)
+    .pipe( map( (res: Character) => res.data.results ) )
+    .subscribe( characters => this.characters = characters );
   }
 }

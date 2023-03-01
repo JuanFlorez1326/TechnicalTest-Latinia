@@ -9,8 +9,9 @@ import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ComicsComponent } from './components/comics/comics.component';
 import { AllCharactersComponent } from './components/all-characters/all-characters.component';
-import { MaterialModule } from '../material/material.module';
+import { MaterialModule } from '../shared/material/material.module';
 import { StoriesComponent } from './components/stories/stories.component';
+import { MarvelRoutingModule } from './marvel-routing.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { StoriesComponent } from './components/stories/stories.component';
     FlexLayoutModule,
     RouterModule,
     MaterialModule,
+    MarvelRoutingModule,
     FormsModule
   ]
 })
