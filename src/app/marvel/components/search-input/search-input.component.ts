@@ -13,7 +13,9 @@ export class SearchInputComponent {
 
   constructor(
     private readonly marvelService: MarvelService
-  ) {}
+  ) {
+    this.characters = JSON.parse(sessionStorage.getItem('characters')!) || [];
+  }
   
   term: string = '';
   characters: ResultCharacter[] = [];
@@ -23,7 +25,12 @@ export class SearchInputComponent {
     if ( name && name.length > 0 ) {
       this.marvelService.getSuggestions(this.term, this.limit)
       .pipe( map( (res: Character) => res.data.results ) )
-      .subscribe( characters => this.characters = characters );
+      .subscribe( 
+        (characters) => {
+          this.characters = characters;
+          sessionStorage.setItem('characters', JSON.stringify(characters));
+        }
+      );
     } else {
       this.characters = [];
     }
