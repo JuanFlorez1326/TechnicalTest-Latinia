@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { MarvelModule } from './marvel/marvel.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { CHARACTER_REDUCERS } from './marvel/state/character.state';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,10 @@ import { StoreModule } from '@ngrx/store';
     MarvelModule,
     SharedModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot(
+      CHARACTER_REDUCERS
+    ),
+    StoreDevtoolsModule.instrument({}),
   ],
   bootstrap: [
     AppComponent

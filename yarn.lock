@@ -2031,7 +2031,14 @@
     "@material/theme" "15.0.0-canary.684e33d25.0"
     "tslib" "^2.1.0"
 
-"@ngrx/store@^15.3.0":
+"@ngrx/store-devtools@^15.3.0":
+  "integrity" "sha512-o39T11T994j5XzwiNquhRHVQiFYlOg1PJWmV++LdIaXD0zYovc9lzNDnZJy04mt9XPTDPu8QmcmzV44zUtY4vg=="
+  "resolved" "https://registry.npmjs.org/@ngrx/store-devtools/-/store-devtools-15.3.0.tgz"
+  "version" "15.3.0"
+  dependencies:
+    "tslib" "^2.0.0"
+
+"@ngrx/store@^15.3.0", "@ngrx/store@15.3.0":
   "integrity" "sha512-8cd0zWkOZ3TedDQHyOzUxZD1HHa0fU8fgzVX/2eIq6wmnleUxHVOKSJvA+DdE4GRoryFqVhAp17L1r5eC2QYHA=="
   "resolved" "https://registry.npmjs.org/@ngrx/store/-/store-15.3.0.tgz"
   "version" "15.3.0"

@@ -8,21 +8,11 @@
         </mat-label>
         <input
             type="text"
-            #name
             placeholder="Example: Thor"
             matInput
-            [matAutocomplete]="auto"
             [(ngModel)]="term"
-            (input)="searchCharacters( name.value)"
+            (input)="searchCharacters( term )"
         >
-        <mat-autocomplete 
-            autoActiveFirstOption 
-            #auto="matAutocomplete"
-        >
-            <mat-option value="" *ngIf="characters.length === 0 && term.length > 0">
-                Nothing was found for the term {{ term }}.
-            </mat-option>
-        </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="search-input">
@@ -33,21 +23,10 @@
             type="number"
             placeholder="Example: 4"
             matInput
-            [matAutocomplete]="auto"
-            (input)="searchCharacters( name.value )"
+            (input)="searchCharacters( term )"
             [(ngModel)]="limit"
         >
-        <mat-autocomplete 
-            autoActiveFirstOption 
-            #auto="matAutocomplete"
-        >
-            <mat-option value="">
-                Invalid limit.
-            </mat-option>
-        </mat-autocomplete>
     </mat-form-field>
 </div>
 
-<app-search-results
-    [card]="characters"
-></app-search-results>
+<app-search-results></app-search-results>
