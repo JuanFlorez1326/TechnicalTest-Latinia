@@ -1,28 +1,71 @@
 <h1>Character finder</h1>
 <mat-divider></mat-divider><br>
 
-<div class="container-input">
+<form 
+    [formGroup]="searchForm" 
+    class="container-input" 
+    (input)="saveForm( $event )"
+>
     <mat-form-field class="search-input">
         <mat-label>
             Character
         </mat-label>
         <input
             type="text"
-            #name
             placeholder="Example: Thor"
             matInput
-            [matAutocomplete]="auto"
+            formControlName="term"
+        >
+        <div
+            *ngIf="
+                searchForm.get('term')?.errors && 
+                searchForm.get('term')?.touched
+            "
+        >
+            <small>This field is required.</small>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="search-input">
+        <mat-label>
+            Limit
+        </mat-label>
+        <input
+            type="number"
+            placeholder="Example: 2"
+            matInput
+            formControlName="limit"
+        >
+        <div
+            *ngIf="
+                searchForm.get('limit')?.errors && 
+                searchForm.get('limit')?.touched
+            "
+        >
+            <small>The limit must be between 1 and 10.</small>
+        </div>
+    </mat-form-field>
+</form>
+
+
+
+
+
+
+
+
+<!-- <div class="container-input">
+    <mat-form-field class="search-input">
+        <mat-label>
+            Character
+        </mat-label>
+        <input
+            type="text"
+            placeholder="Example: Thor"
+            matInput
             [(ngModel)]="term"
-            (input)="searchCharacters( name.value)"
+            (input)="searchCharacters( term )"
         >
-        <mat-autocomplete 
-            autoActiveFirstOption 
-            #auto="matAutocomplete"
-        >
-            <mat-option value="" *ngIf="characters.length === 0 && term.length > 0">
-                Nothing was found for the term {{ term }}.
-            </mat-option>
-        </mat-autocomplete>
     </mat-form-field>
 
     <mat-form-field class="search-input">
@@ -33,21 +76,10 @@
             type="number"
             placeholder="Example: 4"
             matInput
-            [matAutocomplete]="auto"
-            (input)="searchCharacters( name.value )"
+            (input)="searchCharacters( term )"
             [(ngModel)]="limit"
         >
-        <mat-autocomplete 
-            autoActiveFirstOption 
-            #auto="matAutocomplete"
-        >
-            <mat-option value="">
-                Invalid limit.
-            </mat-option>
-        </mat-autocomplete>
     </mat-form-field>
-</div>
+</div> -->
 
-<app-search-results
-    [card]="characters"
-></app-search-results>
+<app-search-results></app-search-results>

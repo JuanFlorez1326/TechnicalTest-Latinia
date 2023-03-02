@@ -4,7 +4,7 @@ import { SearchInputComponent } from './components/search-input/search-input.com
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { HomeComponent } from './containers/home/home.component';
 import { SeeCharactersComponent } from './components/see-characters/see-characters.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ComicsComponent } from './components/comics/comics.component';
@@ -13,6 +13,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { StoriesComponent } from './components/stories/stories.component';
 import { MarvelRoutingModule } from './marvel-routing.module';
 import { DetailedComponent } from './containers/detailed/detailed.component';
+import { ErrorTailorModule } from '@ngneat/error-tailor';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DetailedComponent } from './containers/detailed/detailed.component';
     RouterModule,
     MaterialModule,
     MarvelRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class MarvelModule {}
