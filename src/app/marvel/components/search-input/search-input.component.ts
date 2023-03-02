@@ -7,6 +7,7 @@ import { Character, ResultCharacter } from '../../interfaces/characters.interfac
 import { loadCharacters, loadCharactersSuccess } from '../../state/actions/character.actions';
 import { selectLoading } from '../../state/selectors/character.selectors';
 import { CharactersState } from '../../state/character.state';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-search-input',
@@ -17,14 +18,34 @@ export class SearchInputComponent  {
 
   constructor(
     private readonly marvelService: MarvelService,
-    private readonly store: Store<CharactersState>
-  ) {}
+    private readonly store: Store<CharactersState>,
+    private readonly formBuilder: FormBuilder
+  ) {
+    this.buildForm();
+  }
 
   loading$: Observable<boolean> = new Observable();
-
-  term: string = '';
+  term!: string;
   characters: ResultCharacter[] = [];
-  limit: string ='2';
+  limit!: number;
+  searchForm!: FormGroup;
+
+  private buildForm() {
+    this.searchForm = this.formBuilder.group({
+      term: ['', [Validators.required]],
+      limit: [1, [Validators.required, Validators.min(1), Validators.max(10)]]
+    });
+  }
+
+  saveForm( event: Event ) {
+    event.preventDefault();
+    if (this.searchForm.valid) {
+      const { term, limit } = this.searchForm.value;
+      this.term = term;
+      this.limit = limit;
+      this.searchCharacters(term);
+    }
+  }
 
   searchCharacters( name: string ) {
     if( name && name.length > 0 ) {
