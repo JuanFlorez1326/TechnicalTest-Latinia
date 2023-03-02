@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AllCharactersComponent } from './components/all-characters/all-characters.component';
-import { HomeComponent } from './pages/home/home.component';
-import { SeeCharactersComponent } from './pages/see-characters/see-characters.component';
+import { HomeComponent } from './containers/home/home.component';
+import { DetailedComponent } from './containers/detailed/detailed.component';
 
 const routes: Routes = [
   {
@@ -12,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: 'character/:id',
-    component: SeeCharactersComponent
+    component: DetailedComponent
   },
   {
     path: '**',
