@@ -8,8 +8,3 @@ export const selectCharacters = createSelector(
     selectCharacterFeature,
     ( state: CharacterState ) => state.characters
 );
-
-export const selectLoading = createSelector(
-    selectCharacterFeature,
-    ( state: CharacterState ) => state.loading
-);

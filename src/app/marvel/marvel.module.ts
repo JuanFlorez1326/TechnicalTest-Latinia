@@ -8,7 +8,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ComicsComponent } from './components/comics/comics.component';
-import { AllCharactersComponent } from './components/all-characters/all-characters.component';
 import { MaterialModule } from '../shared/material/material.module';
 import { StoriesComponent } from './components/stories/stories.component';
 import { MarvelRoutingModule } from './marvel-routing.module';
@@ -22,7 +21,6 @@ import { TableCharactersComponent } from './components/table-characters/table-ch
     HomeComponent,
     SeeCharactersComponent,
     ComicsComponent,
-    AllCharactersComponent,
     StoriesComponent,
     DetailedComponent,
     TableCharactersComponent

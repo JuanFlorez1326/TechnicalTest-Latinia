@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { MarvelService } from '../../services/marvel.service';
 import { Character, ResultCharacter } from '../../interfaces/characters.interface';
-import { loadCharacters, loadCharactersSuccess } from '../../state/actions/character.actions';
-import { selectLoading } from '../../state/selectors/character.selectors';
+import {  loadCharactersSuccess } from '../../state/actions/character.actions';
 import { CharactersState } from '../../state/character.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './search-input.component.html',
   styleUrls: ['./search-input.component.scss']
 })
-export class SearchInputComponent  {
+export class SearchInputComponent implements OnInit  {
 
   constructor(
     private readonly marvelService: MarvelService,
@@ -22,6 +21,15 @@ export class SearchInputComponent  {
     private readonly formBuilder: FormBuilder
   ) {
     this.buildForm();
+  }
+  ngOnInit(): void {
+    this.marvelService.getAllCharacters()
+    .pipe( map( (res: Character) => res.data.results ) )
+    .subscribe(
+      ( response: ResultCharacter[] ) => {
+        this.store.dispatch(loadCharactersSuccess({ characters: response }));
+      }
+    );
   }
 
   loading$: Observable<boolean> = new Observable();
@@ -51,8 +59,6 @@ export class SearchInputComponent  {
 
   searchCharacters( name: string ) {
     if( name && name.length > 0 ) {
-      this.loading$ = this.store.select(selectLoading);
-      this.store.dispatch(loadCharacters());
       this.marvelService.getSuggestions(this.term, this.limit)
       .pipe( map( (res: Character) => res.data.results ) )
       .subscribe(
