@@ -1,8 +1,12 @@
 .container-input {
     width:100%;
     display:flex;
+    justify-content:center;
     .search-input {
-        width:500%;
+        width:45%;
         margin: 0 10px;
+    }
+    .container-btn-search {
+        margin-left: 5px;
     }
 }

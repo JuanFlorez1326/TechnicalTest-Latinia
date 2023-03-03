@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import {MatTableModule} from '@angular/material/table';
 import { NgModule } from '@angular/core';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { NgModule } from '@angular/core';
     MatListModule,
     MatProgressSpinnerModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule
   ]
 })
 export class MaterialModule {}

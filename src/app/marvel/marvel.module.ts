@@ -4,7 +4,7 @@ import { SearchInputComponent } from './components/search-input/search-input.com
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { HomeComponent } from './containers/home/home.component';
 import { SeeCharactersComponent } from './components/see-characters/see-characters.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ComicsComponent } from './components/comics/comics.component';
@@ -13,7 +13,7 @@ import { MaterialModule } from '../shared/material/material.module';
 import { StoriesComponent } from './components/stories/stories.component';
 import { MarvelRoutingModule } from './marvel-routing.module';
 import { DetailedComponent } from './containers/detailed/detailed.component';
-import { ErrorTailorModule } from '@ngneat/error-tailor';
+import { TableCharactersComponent } from './components/table-characters/table-characters.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
     ComicsComponent,
     AllCharactersComponent,
     StoriesComponent,
-    DetailedComponent
+    DetailedComponent,
+    TableCharactersComponent
   ],
   imports: [
     CommonModule,
@@ -32,7 +33,6 @@ import { ErrorTailorModule } from '@ngneat/error-tailor';
     RouterModule,
     MaterialModule,
     MarvelRoutingModule,
-    FormsModule,
     ReactiveFormsModule,
   ]
 })
