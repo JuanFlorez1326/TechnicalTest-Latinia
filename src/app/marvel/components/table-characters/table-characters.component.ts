@@ -7,7 +7,7 @@ import { selectCharacters } from '../../state/selectors/character.selectors';
 @Component({
   selector: 'app-table-characters',
   templateUrl: './table-characters.component.html',
-  styleUrls: ['./table-characters.component.scss']
+  styles: [`.container-table { width:95%; margin:auto; }`]
 })
 export class TableCharactersComponent {
   constructor(

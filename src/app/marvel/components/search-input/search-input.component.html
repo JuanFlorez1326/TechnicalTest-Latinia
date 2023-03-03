@@ -47,19 +47,17 @@
     </mat-form-field>
 
     <div class="container-btn-search">
-        <button color="link" mat-fab enabled>
+        <button color="link" mat-fab enabled (click)="showTableCharacters()">
           <mat-icon>sync</mat-icon>
         </button>
     </div>
 </form>
 <mat-divider></mat-divider><br>
 
-<!-- <div>
-    <app-table-characters>
-    </app-table-characters>
-</div> -->
+<div *ngIf="showTable">
+    <app-search-results></app-search-results>
+</div>
 
-<div>
-    <app-search-results>
-    </app-search-results>
+<div *ngIf="!showTable">
+    <app-table-characters></app-table-characters>
 </div>

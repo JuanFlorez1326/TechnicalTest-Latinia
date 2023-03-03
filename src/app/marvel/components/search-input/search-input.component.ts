@@ -25,10 +25,12 @@ export class SearchInputComponent  {
   }
 
   loading$: Observable<boolean> = new Observable();
-  term!: string;
   characters: ResultCharacter[] = [];
-  limit!: number;
   searchForm!: FormGroup;
+  limit!: number;
+  term!: string;
+  showTable: boolean = true;
+
 
   private buildForm() {
     this.searchForm = this.formBuilder.group({
@@ -60,6 +62,14 @@ export class SearchInputComponent  {
       );
     } else {
       this.characters = [];
+    }
+  }
+
+  showTableCharacters() {
+    if(this.showTable) {
+      this.showTable = false;
+    } else {
+      this.showTable = true;
     }
   }
 }
