@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html'
+  template: `<app-sidebar></app-sidebar>`
 })
-export class AppComponent {
-  title = 'marvellatinia';
-}
+export class AppComponent {}
