@@ -45,41 +45,19 @@
             <small>The limit must be between 1 and 10.</small>
         </div>
     </mat-form-field>
+
+    <div class="container-btn-search">
+        <button color="link" mat-fab enabled (click)="showTableCharacters()">
+          <mat-icon>sync</mat-icon>
+        </button>
+    </div>
 </form>
+<mat-divider></mat-divider><br>
 
+<div *ngIf="showTable">
+    <app-search-results></app-search-results>
+</div>
 
-
-
-
-
-
-
-<!-- <div class="container-input">
-    <mat-form-field class="search-input">
-        <mat-label>
-            Character
-        </mat-label>
-        <input
-            type="text"
-            placeholder="Example: Thor"
-            matInput
-            [(ngModel)]="term"
-            (input)="searchCharacters( term )"
-        >
-    </mat-form-field>
-
-    <mat-form-field class="search-input">
-        <mat-label>
-            Limit
-        </mat-label>
-        <input
-            type="number"
-            placeholder="Example: 4"
-            matInput
-            (input)="searchCharacters( term )"
-            [(ngModel)]="limit"
-        >
-    </mat-form-field>
-</div> -->
-
-<app-search-results></app-search-results>
+<div *ngIf="!showTable">
+    <app-table-characters></app-table-characters>
+</div>
