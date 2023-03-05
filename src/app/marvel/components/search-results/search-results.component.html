@@ -1,5 +1,9 @@
 <div class="card-container">
-    <div class="card" *ngFor="let character of characters$ | async">
+    <div 
+        [routerLink]="['/marvel/character', character.id]" 
+        class="card" 
+        *ngFor="let character of characters$ | async"
+    >
         <div class="img-card">
             <img class="image" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" [alt]="character.name">
         </div>
@@ -15,14 +19,6 @@
                 <ng-template #seeDescription >
                     <p> {{ character.description }} </p>
                 </ng-template>
-            </div>
-            <div class="card-btn">
-                <mat-card-actions>
-                    <button 
-                        mat-button color="warn"
-                        [routerLink]="['/marvel/character', character.id]"
-                    >More Info...</button>
-                </mat-card-actions>
             </div>
         </div>
     </div>

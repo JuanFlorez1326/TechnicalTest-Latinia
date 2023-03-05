@@ -7,7 +7,7 @@ import { MarvelService } from '../../services/marvel.service';
 @Component({
   selector: 'app-stories',
   templateUrl: './stories.component.html',
-  styles: [` .title { font-weight: bold; } `]
+  styleUrls: ['./stories.component.scss']
 })
 export class StoriesComponent implements OnInit {
   

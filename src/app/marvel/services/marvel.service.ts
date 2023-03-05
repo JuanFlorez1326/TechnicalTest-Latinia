@@ -37,7 +37,7 @@ export class MarvelService {
   }
 
   getStoriesByCharacterId( id: string ): Observable<Stories> {
-    const url = `${api.url}/${id}/stories?orderBy=-id&ts=1&apikey=${api.key}&hash=${api.hash}&limit=5`;
+    const url = `${api.url}/${id}/stories?orderBy=-id&ts=1&apikey=${api.key}&hash=${api.hash}&limit=6`;
     return this.http.get<Stories>(url);
   }
 
