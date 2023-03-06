@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { map } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { MarvelService } from '../../services/marvel.service';
@@ -31,7 +31,7 @@ export class SearchInputComponent implements OnInit  {
 
   ngOnInit(): void {
     this.marvelService.getAllCharacters()
-    .pipe( map( (res: Character) => res.data.results ) )
+    .pipe< ResultCharacter[] >  ( map( (res: Character) => res.data.results ) )
     .subscribe(
       ( response: ResultCharacter[] ) => {
         this.store.dispatch(loadCharactersSuccess({ characters: response }));
@@ -39,7 +39,7 @@ export class SearchInputComponent implements OnInit  {
     );
   }
 
-  private buildForm() {
+  private buildForm(): void {
     this.searchForm = this.formBuilder.group({
       term: ['', [Validators.required]],
       limit: [1, [
@@ -51,7 +51,7 @@ export class SearchInputComponent implements OnInit  {
     });
   }
 
-  saveForm( event: Event ) {
+  saveForm( event: Event ): void {
     event.preventDefault();
     if (this.searchForm.valid) {
       const { term, limit } = this.searchForm.value;
@@ -61,9 +61,9 @@ export class SearchInputComponent implements OnInit  {
     }
   }
 
-  searchCharacters() {
+  searchCharacters(): void {
     this.marvelService.getSuggestions(this.term, this.limit)
-    .pipe( map( (res: Character) => res.data.results ) )
+    .pipe< ResultCharacter[] > ( map( (res: Character) => res.data.results ) )
     .subscribe(
       ( characters: ResultCharacter[] ) => {
         this.store.dispatch(loadCharactersSuccess({ characters: characters }));
@@ -71,7 +71,7 @@ export class SearchInputComponent implements OnInit  {
     );
   }
 
-  showTableCharacters() {
+  showTableCharacters(): void {
     if(this.showTable) {
       this.showTable = false;
     } else {

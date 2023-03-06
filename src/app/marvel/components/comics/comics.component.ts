@@ -50,7 +50,7 @@ export class ComicsComponent implements OnInit {
     .subscribe(
       ( response: ResultComic[] ) => {
         this.comics = response;
-        this.store.dispatch(loadComicsSuccess({ comics: response }));
+        this.store.dispatch(loadComicsSuccess({ comics: response })); 
       }
     );
   }

@@ -24,7 +24,7 @@ export class SeeCharactersComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-    .pipe(
+    .pipe< Character, ResultCharacter[] > (
       switchMap( ({ id }) => this.marvelService.getCharacterById(id) ),
       map( ( res: Character ) => res.data.results )
     )

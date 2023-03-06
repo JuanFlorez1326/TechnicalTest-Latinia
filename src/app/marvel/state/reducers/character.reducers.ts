@@ -1,9 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
-import { CharacterState, ComicState } from '../../interfaces/characters.state';
-import { loadCharactersSuccess, loadComicsSuccess } from '../actions/character.actions';
+import { CharacterState, ComicState, StoryState } from '../../interfaces/characters.state';
+import { loadCharactersSuccess, loadComicsSuccess, loadStoriesSuccess } from '../actions/character.actions';
 
 export const initialState: CharacterState = { characters: [] };
 export const initialComicState: ComicState = { comics: [] };
+export const initialStoryState: StoryState = { stories: [] };
 
 export const characterReducer = createReducer(
     initialState,
@@ -16,5 +17,12 @@ export const comicReducer = createReducer(
     initialComicState,
     on( loadComicsSuccess, ( state, { comics } ) => {
         return { ...state, characters: [ ...comics ] };
+    })
+);
+
+export const storyReducer = createReducer(
+    initialStoryState,
+    on( loadStoriesSuccess, ( state, { stories } ) => {
+        return { ...state, characters: [ ...stories ] };
     })
 );
