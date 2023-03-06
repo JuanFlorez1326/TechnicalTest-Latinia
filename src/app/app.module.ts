@@ -25,7 +25,9 @@ import { CHARACTER_REDUCERS } from './marvel/state/character.state';
     StoreModule.forRoot(
       CHARACTER_REDUCERS
     ),
-    StoreDevtoolsModule.instrument({}),
+    StoreDevtoolsModule.instrument({ 
+      name: 'Marvel App' 
+    })
   ],
   bootstrap: [
     AppComponent
