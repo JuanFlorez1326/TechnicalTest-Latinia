@@ -25,7 +25,7 @@ export class StoriesComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
     .pipe< Stories, ResultStory[] > (
-      switchMap( ({ id }) => this.marvelService.getStoriesByCharacterId( id )),
+      switchMap( ({ id }) => this.marvelService.getStoriesById( id )),
       map( ( res: Stories ) => res.data.results )
     )
     .subscribe(

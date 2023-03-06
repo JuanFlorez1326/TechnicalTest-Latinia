@@ -27,7 +27,7 @@ export class ComicsComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
     .pipe< Comic, ResultComic[] > (
-      switchMap( ({ id }) => this.marvelService.getComicsByCharacterId( id )),
+      switchMap( ({ id }) => this.marvelService.getComicsById( id )),
       map( ( res: Comic ) => res.data.results )
     )
     .subscribe(
@@ -44,7 +44,7 @@ export class ComicsComponent implements OnInit {
 
     this.activatedRoute.params
     .pipe< Comic, ResultComic[] > (
-      switchMap( ({ id }) => this.marvelService.getComicsByFormatAndCharacterId( id, format )),
+      switchMap( ({ id }) => this.marvelService.getComicsById( id, format )),
       map( ( res: Comic ) => res.data.results )
     )
     .subscribe(

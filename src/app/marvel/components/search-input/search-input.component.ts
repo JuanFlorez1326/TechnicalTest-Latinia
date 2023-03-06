@@ -30,7 +30,7 @@ export class SearchInputComponent implements OnInit  {
   showTable: boolean = true;
 
   ngOnInit(): void {
-    this.marvelService.getAllCharacters()
+    this.marvelService.getCharacters()
     .pipe< ResultCharacter[] >  ( map( (res: Character) => res.data.results ) )
     .subscribe(
       ( response: ResultCharacter[] ) => {
@@ -62,7 +62,7 @@ export class SearchInputComponent implements OnInit  {
   }
 
   searchCharacters(): void {
-    this.marvelService.getSuggestions(this.term, this.limit)
+    this.marvelService.searchCharacter(this.term, this.limit)
     .pipe< ResultCharacter[] > ( map( (res: Character) => res.data.results ) )
     .subscribe(
       ( characters: ResultCharacter[] ) => {
