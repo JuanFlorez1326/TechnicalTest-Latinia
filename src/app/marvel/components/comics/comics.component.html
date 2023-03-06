@@ -31,7 +31,7 @@
                 <img class="image-comic" src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" [alt]="comic.title">
             
                 <mat-card-content>
-                    <h2>{{ comic.modified | date }}</h2>
+                    <h2>{{ comic.modified | date: 'mediumDate' }}</h2>
                 </mat-card-content>
             </mat-card>
         </div>
