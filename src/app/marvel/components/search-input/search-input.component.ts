@@ -22,6 +22,13 @@ export class SearchInputComponent implements OnInit  {
   ) {
     this.buildForm();
   }
+
+  characters: ResultCharacter[] = [];
+  searchForm!: FormGroup;
+  limit!: number;
+  term!: string;
+  showTable: boolean = true;
+
   ngOnInit(): void {
     this.marvelService.getAllCharacters()
     .pipe( map( (res: Character) => res.data.results ) )
@@ -32,18 +39,15 @@ export class SearchInputComponent implements OnInit  {
     );
   }
 
-  loading$: Observable<boolean> = new Observable();
-  characters: ResultCharacter[] = [];
-  searchForm!: FormGroup;
-  limit!: number;
-  term!: string;
-  showTable: boolean = true;
-
-
   private buildForm() {
     this.searchForm = this.formBuilder.group({
       term: ['', [Validators.required]],
-      limit: [1, [Validators.required, Validators.min(1), Validators.max(10)]]
+      limit: [1, [
+          Validators.required, 
+          Validators.min(1), 
+          Validators.max(10)
+        ]
+      ]
     });
   }
 
@@ -53,22 +57,18 @@ export class SearchInputComponent implements OnInit  {
       const { term, limit } = this.searchForm.value;
       this.term = term;
       this.limit = limit;
-      this.searchCharacters(term);
+      this.searchCharacters();
     }
   }
 
-  searchCharacters( name: string ) {
-    if( name && name.length > 0 ) {
-      this.marvelService.getSuggestions(this.term, this.limit)
-      .pipe( map( (res: Character) => res.data.results ) )
-      .subscribe(
-        ( characters: ResultCharacter[] ) => {
-          this.store.dispatch(loadCharactersSuccess({ characters: characters }));
-        }
-      );
-    } else {
-      this.characters = [];
-    }
+  searchCharacters() {
+    this.marvelService.getSuggestions(this.term, this.limit)
+    .pipe( map( (res: Character) => res.data.results ) )
+    .subscribe(
+      ( characters: ResultCharacter[] ) => {
+        this.store.dispatch(loadCharactersSuccess({ characters: characters }));
+      }
+    );
   }
 
   showTableCharacters() {
