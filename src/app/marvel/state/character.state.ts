@@ -1,11 +1,13 @@
 import { ActionReducerMap } from "@ngrx/store";
-import { CharacterState } from "../interfaces/characters.state";
-import { characterReducer } from "./reducers/character.reducers";
+import { CharacterState, ComicState } from "../interfaces/characters.state";
+import { characterReducer, comicReducer } from "./reducers/character.reducers";
 
 export interface CharactersState {
     character: CharacterState;
+    comic: ComicState;
 }
 
 export const CHARACTER_REDUCERS: ActionReducerMap<CharactersState> = {
-    character: characterReducer
+    character: characterReducer,
+    comic: comicReducer
 }
