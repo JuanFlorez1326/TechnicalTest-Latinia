@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { MarvelService } from '../../services/marvel.service';
 import { Character, ResultCharacter } from '../../interfaces/characters.interface';
-import {  loadCharactersSuccess } from '../../state/actions/character.actions';
+import { loadCharactersSuccess } from '../../state/actions/character.actions';
 import { CharactersState } from '../../state/character.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -22,7 +22,7 @@ export class SearchInputComponent implements OnInit  {
   ) {
     this.buildForm();
     this.searchForm.valueChanges.subscribe( form => {
-      this.term = form.term;
+      this.nameStartsWith = form.nameStartsWith;
       this.limit = form.limit;
     });
   }
@@ -30,9 +30,10 @@ export class SearchInputComponent implements OnInit  {
   characters: ResultCharacter[] = [];
   searchForm!: FormGroup;
   limit!: number;
-  term!: string;
+  nameStartsWith!: string;
   showTable: boolean = true;
   subscription: Subscription = new Subscription();
+  alphanumericRegex: RegExp = /^[a-zA-Z0-9- .()]*$/;
 
   ngOnInit(): void {
     this.marvelService.getCharacters()
@@ -46,7 +47,10 @@ export class SearchInputComponent implements OnInit  {
 
   private buildForm(): void {
     this.searchForm = this.formBuilder.group({
-      term: ['', [Validators.required]],
+      nameStartsWith: ['', [
+        Validators.required,
+        Validators.pattern(this.alphanumericRegex)
+      ]],
       limit: [1, [
           Validators.required, 
           Validators.min(1), 
@@ -58,15 +62,15 @@ export class SearchInputComponent implements OnInit  {
 
   saveForm(): void {  
     if (this.searchForm.valid) {
-      const { term, limit } = this.searchForm.value;
-      this.term = term;
+      const { nameStartsWith, limit } = this.searchForm.value;
+      this.nameStartsWith = nameStartsWith;
       this.limit = limit;
       this.searchCharacters();
     }
   }
 
   searchCharacters(): void {
-    this.marvelService.searchCharacter(this.term, this.limit)
+    this.marvelService.searchCharacter(this.nameStartsWith, this.limit)
     .pipe< ResultCharacter[] > ( map( (res: Character) => res.data.results ) )
     .subscribe(
       ( characters: ResultCharacter[] ) => {

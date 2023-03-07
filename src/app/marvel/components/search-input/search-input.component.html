@@ -14,15 +14,15 @@
             type="text"
             placeholder="Example: Thor"
             matInput
-            formControlName="term"
+            formControlName="nameStartsWith"
         >
         <div
             *ngIf="
-                searchForm.get('term')?.invalid && 
-                searchForm.get('term')?.touched
+                searchForm.get('nameStartsWith')?.invalid && 
+                searchForm.get('nameStartsWith')?.touched
             "
         >
-            <small>This field is required.</small>
+            <small>Enter a valid character.</small>
         </div>
     </mat-form-field>
 

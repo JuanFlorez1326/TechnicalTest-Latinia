@@ -45,8 +45,8 @@ export class MarvelService {
     return this.http.get<Stories>(url);
   }
 
-  searchCharacter( term: string, limit: number ): Observable<Character> {
-    const url = `${api.url}?orderBy=name&ts=1&apikey=${api.key}&hash=${api.hash}&nameStartsWith=${term}&limit=${limit}`;
+  searchCharacter( nameStartsWith: string, limit: number ): Observable<Character> {
+    const url = `${api.url}?orderBy=name&ts=1&apikey=${api.key}&hash=${api.hash}&nameStartsWith=${nameStartsWith}&limit=${limit}`;
     return this.http.get<Character>(url);
   }
 }
