@@ -3,8 +3,8 @@
 
 <form 
     [formGroup]="searchForm" 
-    class="container-input" 
-    (input)="saveForm( $event )"
+    class="container-input"
+    (input)="saveForm(); $event.preventDefault();"
 >
     <mat-form-field class="search-input">
         <mat-label>
@@ -18,7 +18,7 @@
         >
         <div
             *ngIf="
-                searchForm.get('term')?.errors && 
+                searchForm.get('term')?.invalid && 
                 searchForm.get('term')?.touched
             "
         >
@@ -38,7 +38,7 @@
         >
         <div
             *ngIf="
-                searchForm.get('limit')?.errors && 
+                searchForm.get('limit')?.invalid && 
                 searchForm.get('limit')?.touched
             "
         >
@@ -47,7 +47,7 @@
     </mat-form-field>
 
     <div class="container-btn-search">
-        <button color="link" mat-fab enabled (click)="showTableCharacters()">
+        <button color="link" mat-fab enabled (click)="showTable = !showTable">
           <mat-icon>sync</mat-icon>
         </button>
     </div>

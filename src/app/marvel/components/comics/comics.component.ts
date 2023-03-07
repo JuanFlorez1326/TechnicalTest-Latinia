@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, switchMap } from 'rxjs';
+import { Subscription, map, switchMap } from 'rxjs';
 import { Comic, ResultComic } from '../../interfaces/comics.interface';
 import { MarvelService } from '../../services/marvel.service';
 import { loadComicsSuccess } from '../../state/actions/character.actions';
@@ -23,6 +23,7 @@ export class ComicsComponent implements OnInit {
   comics: ResultComic[] = [];
   formats: string[] = ['comic','digest', 'magazine', 'hardcover', 'graphic novel', 'digital comic', 'infinite comic', 'trade paperback'];
   formatActive!: string;
+  subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -53,5 +54,9 @@ export class ComicsComponent implements OnInit {
         this.store.dispatch(loadComicsSuccess({ comics: response })); 
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription) this.subscription.unsubscribe();
   }
 }

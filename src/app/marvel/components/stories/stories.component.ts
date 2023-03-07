@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { map, switchMap } from 'rxjs';
+import { Subscription, map, switchMap } from 'rxjs';
 import { ResultStory, Stories } from '../../interfaces/stories.interface';
 import { MarvelService } from '../../services/marvel.service';
 import { loadStoriesSuccess } from '../../state/actions/character.actions';
@@ -21,6 +21,7 @@ export class StoriesComponent implements OnInit {
   ) {}
 
   stories: ResultStory[] = [];
+  subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.activatedRoute.params
@@ -35,4 +36,9 @@ export class StoriesComponent implements OnInit {
       }
     );
   }
+
+  ngOnDestroy(): void {
+    if(this.subscription) this.subscription.unsubscribe();
+  }
+
 }

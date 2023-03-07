@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { MarvelService } from '../../services/marvel.service';
@@ -21,6 +21,10 @@ export class SearchInputComponent implements OnInit  {
     private readonly formBuilder: FormBuilder
   ) {
     this.buildForm();
+    this.searchForm.valueChanges.subscribe( form => {
+      this.term = form.term;
+      this.limit = form.limit;
+    });
   }
 
   characters: ResultCharacter[] = [];
@@ -28,6 +32,7 @@ export class SearchInputComponent implements OnInit  {
   limit!: number;
   term!: string;
   showTable: boolean = true;
+  subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.marvelService.getCharacters()
@@ -51,8 +56,7 @@ export class SearchInputComponent implements OnInit  {
     });
   }
 
-  saveForm( event: Event ): void {
-    event.preventDefault();
+  saveForm(): void {  
     if (this.searchForm.valid) {
       const { term, limit } = this.searchForm.value;
       this.term = term;
@@ -77,5 +81,9 @@ export class SearchInputComponent implements OnInit  {
     } else {
       this.showTable = true;
     }
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription) this.subscription.unsubscribe();
   }
 }

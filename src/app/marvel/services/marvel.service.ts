@@ -24,12 +24,20 @@ export class MarvelService {
     return this.http.get<Character>(url);
   }
 
-  getComicsById( id: string, format?: string ): Observable<Comic> {
+  getComicsById( id: string, format?: string ): Observable<any> {
+    
+    // const httpOptions: any = {
+    //   params: {
+    //     format,
+    //   },
+    //   headers: {}
+    // }
+
     const url = format 
       ? `${api.url}/${id}/comics?format=${format}&orderBy=-focDate&ts=1&apikey=${api.key}&hash=${api.hash}&limit=6`
       : `${api.url}/${id}/comics?orderBy=-focDate&ts=1&apikey=${api.key}&hash=${api.hash}&limit=6`;
 
-    return this.http.get<Comic>(url);
+    return this.http.get<Comic>(url, /*httpOptions*/);
   }
 
   getStoriesById( id: string ): Observable<Stories> {
