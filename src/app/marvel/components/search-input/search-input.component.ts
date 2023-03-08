@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { MarvelService } from '../../services/marvel.service';
 import { Character, ResultCharacter } from '../../interfaces/characters.interface';
-import {  loadCharactersSuccess } from '../../state/actions/character.actions';
+import { loadCharactersSuccess } from '../../state/actions/character.actions';
 import { CharactersState } from '../../state/character.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { selectCharacters } from '../../state/selectors/character.selectors';
 
 @Component({
   selector: 'app-search-input',
@@ -21,16 +22,26 @@ export class SearchInputComponent implements OnInit  {
     private readonly formBuilder: FormBuilder
   ) {
     this.buildForm();
+    this.searchForm.valueChanges.subscribe( form => {
+      this.nameStartsWith = form.nameStartsWith;
+      this.limit = form.limit;
+    });
   }
 
   characters: ResultCharacter[] = [];
   searchForm!: FormGroup;
   limit!: number;
-  term!: string;
+  nameStartsWith!: string;
   showTable: boolean = true;
+  subscription: Subscription = new Subscription();
+  alphanumericRegex: RegExp = /^[a-zA-Z0-9- .()]*$/;
+  characters$: Observable<any> = new Observable();
 
   ngOnInit(): void {
-    this.marvelService.getCharacters()
+    
+    this.characters$ = this.store.select(selectCharacters);
+
+    this.marvelService.getAllCharacters()
     .pipe< ResultCharacter[] >  ( map( (res: Character) => res.data.results ) )
     .subscribe(
       ( response: ResultCharacter[] ) => {
@@ -41,7 +52,10 @@ export class SearchInputComponent implements OnInit  {
 
   private buildForm(): void {
     this.searchForm = this.formBuilder.group({
-      term: ['', [Validators.required]],
+      nameStartsWith: ['', [
+        Validators.required,
+        Validators.pattern(this.alphanumericRegex)
+      ]],
       limit: [1, [
           Validators.required, 
           Validators.min(1), 
@@ -51,18 +65,17 @@ export class SearchInputComponent implements OnInit  {
     });
   }
 
-  saveForm( event: Event ): void {
-    event.preventDefault();
+  saveForm(): void {  
     if (this.searchForm.valid) {
-      const { term, limit } = this.searchForm.value;
-      this.term = term;
+      const { nameStartsWith, limit } = this.searchForm.value;
+      this.nameStartsWith = nameStartsWith;
       this.limit = limit;
       this.searchCharacters();
     }
   }
 
   searchCharacters(): void {
-    this.marvelService.searchCharacter(this.term, this.limit)
+    this.marvelService.searchCharacter(this.nameStartsWith, this.limit)
     .pipe< ResultCharacter[] > ( map( (res: Character) => res.data.results ) )
     .subscribe(
       ( characters: ResultCharacter[] ) => {
@@ -77,5 +90,9 @@ export class SearchInputComponent implements OnInit  {
     } else {
       this.showTable = true;
     }
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription) this.subscription.unsubscribe();
   }
 }

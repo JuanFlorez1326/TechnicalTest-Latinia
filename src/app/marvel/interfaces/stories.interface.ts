@@ -13,7 +13,7 @@ export interface Data {
     limit:   number;
     total:   number;
     count:   number;
-    results: ResultStory[];
+    results: ResultStory[] //| Characters[];
 }
 
 export interface ResultStory {

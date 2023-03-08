@@ -3,13 +3,13 @@ import { ResultComic } from "./comics.interface";
 import { ResultStory } from "./stories.interface";
 
 export interface CharacterState {
-    characters: ReadonlyArray<ResultCharacter>;
+    characters: Array<ResultCharacter>;
 }
 
 export interface ComicState {
-    comics: ReadonlyArray<ResultComic>;
+    comics: Array<ResultComic>;
 }
 
 export interface StoryState {
-    stories: ReadonlyArray<ResultStory>;
+    stories: Array<ResultStory>;
 }

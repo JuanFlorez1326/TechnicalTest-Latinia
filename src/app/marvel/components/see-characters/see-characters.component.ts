@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map } from 'rxjs';
+import { switchMap, map, Subscription, Observable, Subscribable } from 'rxjs';
 import { MarvelService } from '../../services/marvel.service';
 import { ResultCharacter, Character } from '../../interfaces/characters.interface';
 import { Store } from '@ngrx/store';
@@ -21,18 +21,25 @@ export class SeeCharactersComponent implements OnInit {
   ) {}
 
   character: ResultCharacter[] = [];
+  subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
-    this.activatedRoute.params
-    .pipe< Character, ResultCharacter[] > (
-      switchMap( ({ id }) => this.marvelService.getCharacters(id) ),
-      map( ( res: Character ) => res.data.results )
-    )
-    .subscribe(
-      ( response: ResultCharacter[] ) => {
-        this.character = response;
-        this.store.dispatch(loadCharactersSuccess({ characters: response }));
-      }
+    this.subscription.add( 
+      this.activatedRoute.params
+      .pipe< Character, ResultCharacter[] > (
+        switchMap( ({ id }) => this.marvelService.getCharacter(id) ),
+        map( ( res: Character ) => res.data.results )
+      )
+      .subscribe(
+        ( response: ResultCharacter[] ) => {
+          this.character = response;
+          this.store.dispatch(loadCharactersSuccess({ characters: response }));
+        }
+      )
     );
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription) this.subscription.unsubscribe(); 
   }
 }
