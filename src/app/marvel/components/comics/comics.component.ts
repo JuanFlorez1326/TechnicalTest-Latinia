@@ -6,6 +6,7 @@ import { Comic, ResultComic } from '../../interfaces/comics.interface';
 import { MarvelService } from '../../services/marvel.service';
 import { loadComicsSuccess } from '../../state/actions/character.actions';
 import { CharactersState } from '../../state/character.state';
+import { Formats } from './formats-comics';
 
 @Component({
   selector: 'app-comics',
@@ -21,7 +22,7 @@ export class ComicsComponent implements OnInit {
   ) { }
 
   comics: ResultComic[] = [];
-  formats: string[] = ['comic','digest', 'magazine', 'hardcover', 'graphic novel', 'digital comic', 'infinite comic', 'trade paperback'];
+  formats: string[] = Object.values(Formats);
   formatActive!: string;
   subscription: Subscription = new Subscription();
 
