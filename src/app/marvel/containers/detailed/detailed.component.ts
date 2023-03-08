@@ -6,8 +6,9 @@ import { Store } from '@ngrx/store';
 import { ResultComic } from '../../interfaces/comics.interface';
 import { Subscription, map, switchMap } from 'rxjs';
 import { ApiResponse } from '../../interfaces/api-response.interface';
-import { loadComicsSuccess } from '../../state/actions/character.actions';
+import { loadComicsSuccess, loadStoriesSuccess } from '../../state/actions/character.actions';
 import { Formats } from '../../components/comics/formats-comics';
+import { ResultStory } from '../../interfaces/stories.interface';
 
 @Component({
   selector: 'app-detailed',
@@ -21,12 +22,14 @@ export class DetailedComponent {
   ) { }
 
   comics: ResultComic[] = [];
+  stories: ResultStory[] = [];
   formats: string[] = Object.values(Formats);
   formatActive!: string;
   subscription: Subscription = new Subscription();
 
   ngOnInit(): void {
     this.getComics();
+    this.getStories();
   }
 
   getComics(): void {
@@ -56,6 +59,20 @@ export class DetailedComponent {
       ( response: ResultComic[] ) => {
         this.comics = response;
         this.store.dispatch(loadComicsSuccess({ comics: response })); 
+      }
+    );
+  }
+
+  getStories(): void {
+    this.activatedRoute.params
+    .pipe< ApiResponse, ResultStory[] > (
+      switchMap( ({ id }) => this.marvelService.getStoriesById( id )),
+      map( ( res: any ) => res.data.results )
+    )
+    .subscribe(
+      ( response: ResultStory[] ) => {
+        this.stories = response;
+        this.store.dispatch(loadStoriesSuccess({ stories: response }));
       }
     );
   }
