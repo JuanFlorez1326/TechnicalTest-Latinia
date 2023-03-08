@@ -17,7 +17,6 @@ export class SearchResultsComponent implements OnInit {
   ) { }
 
   @Input('card-characters') characters$!: Observable<readonly ResultCharacter[]> | Subscribable<readonly ResultCharacter[]> | Promise<readonly ResultCharacter[]> | null | undefined;
-  //characters$: Observable< readonly ResultCharacter[] > = new Observable();
   
   ngOnInit(): void {
     this.characters$ = this.store.select(selectCharacters);

@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription, map, switchMap } from 'rxjs';
-import { ResultStory, Stories } from '../../interfaces/stories.interface';
+import { ResultStory } from '../../interfaces/stories.interface';
 import { MarvelService } from '../../services/marvel.service';
 import { loadStoriesSuccess } from '../../state/actions/character.actions';
 import { CharactersState } from '../../state/character.state';
+import { ApiResponse } from '../../interfaces/api-response.interface';
 
 @Component({
   selector: 'app-stories',
@@ -25,9 +26,9 @@ export class StoriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-    .pipe< Stories, ResultStory[] > (
+    .pipe< ApiResponse, ResultStory[] > (
       switchMap( ({ id }) => this.marvelService.getStoriesById( id )),
-      map( ( res: Stories ) => res.data.results )
+      map( ( res: any ) => res.data.results )
     )
     .subscribe(
       ( response: ResultStory[] ) => {
@@ -40,5 +41,4 @@ export class StoriesComponent implements OnInit {
   ngOnDestroy(): void {
     if(this.subscription) this.subscription.unsubscribe();
   }
-
 }

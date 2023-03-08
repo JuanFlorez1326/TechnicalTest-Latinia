@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, Subscription, Observable, Subscribable } from 'rxjs';
+import { switchMap, map, Subscription } from 'rxjs';
 import { MarvelService } from '../../services/marvel.service';
-import { ResultCharacter, Character } from '../../interfaces/characters.interface';
+import { ResultCharacter } from '../../interfaces/characters.interface';
 import { Store } from '@ngrx/store';
 import { CharactersState } from '../../state/character.state';
 import { loadCharactersSuccess } from '../../state/actions/character.actions';
@@ -26,9 +26,9 @@ export class SeeCharactersComponent implements OnInit {
   ngOnInit(): void {
     this.subscription.add( 
       this.activatedRoute.params
-      .pipe< Character, ResultCharacter[] > (
+      .pipe (
         switchMap( ({ id }) => this.marvelService.getCharacter(id) ),
-        map( ( res: Character ) => res.data.results )
+        map( ( res: any ) => res.data.results )
       )
       .subscribe(
         ( response: ResultCharacter[] ) => {

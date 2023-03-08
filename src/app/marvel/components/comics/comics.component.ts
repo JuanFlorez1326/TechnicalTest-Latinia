@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription, map, switchMap } from 'rxjs';
-import { Comic, ResultComic } from '../../interfaces/comics.interface';
+import { ResultComic } from '../../interfaces/comics.interface';
 import { MarvelService } from '../../services/marvel.service';
 import { loadComicsSuccess } from '../../state/actions/character.actions';
 import { CharactersState } from '../../state/character.state';
 import { Formats } from './formats-comics';
+import { ApiResponse } from '../../interfaces/api-response.interface';
 
 @Component({
   selector: 'app-comics',
@@ -28,9 +29,9 @@ export class ComicsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.params
-    .pipe< Comic, ResultComic[] > (
+    .pipe< ApiResponse, ResultComic[] > (
       switchMap( ({ id }) => this.marvelService.getComicsById( id )),
-      map( ( res: Comic ) => res.data.results )
+      map( ( res: any ) => res.data.results )
     )
     .subscribe(
       ( response: ResultComic[] ) => {
@@ -45,9 +46,9 @@ export class ComicsComponent implements OnInit {
     this.formatActive = format;
 
     this.activatedRoute.params
-    .pipe< Comic, ResultComic[] > (
+    .pipe< ApiResponse, ResultComic[] > (
       switchMap( ({ id }) => this.marvelService.getComicsById( id, { format } )),
-      map( ( res: Comic ) => res.data.results )
+      map( ( res: any ) => res.data.results )
     )
     .subscribe(
       ( response: ResultComic[] ) => {
