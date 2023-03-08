@@ -1,9 +1,6 @@
-import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { CharactersState } from '../../state/character.state';
-import { selectCharacters } from '../../state/selectors/character.selectors';
+import { Component, Input } from '@angular/core';
 import { ResultCharacter } from '../../interfaces/characters.interface';
+import { CdkTableDataSourceInput } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-table-characters',
@@ -11,14 +8,7 @@ import { ResultCharacter } from '../../interfaces/characters.interface';
   styles: [`.container-table { width:95%; margin:auto; }`]
 })
 export class TableCharactersComponent {
-  constructor(
-    private readonly store: Store<CharactersState>
-  ) {}
-
-  characters$: Observable< readonly ResultCharacter[] > = new Observable();
+  
+  @Input('table-characters') characters$!: CdkTableDataSourceInput<ResultCharacter>;
   displayedColumns: string[] = ['position', 'id', 'date', 'name', 'seemore'];
-
-  ngOnInit(): void {
-    this.characters$ = this.store.select(selectCharacters);
-  }
 }

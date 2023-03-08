@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, map } from 'rxjs';
+import { Observable, Subscription, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { MarvelService } from '../../services/marvel.service';
@@ -7,6 +7,7 @@ import { Character, ResultCharacter } from '../../interfaces/characters.interfac
 import { loadCharactersSuccess } from '../../state/actions/character.actions';
 import { CharactersState } from '../../state/character.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { selectCharacters } from '../../state/selectors/character.selectors';
 
 @Component({
   selector: 'app-search-input',
@@ -34,8 +35,12 @@ export class SearchInputComponent implements OnInit  {
   showTable: boolean = true;
   subscription: Subscription = new Subscription();
   alphanumericRegex: RegExp = /^[a-zA-Z0-9- .()]*$/;
+  characters$: Observable<any> = new Observable();
 
   ngOnInit(): void {
+    
+    this.characters$ = this.store.select(selectCharacters);
+
     this.marvelService.getCharacters()
     .pipe< ResultCharacter[] >  ( map( (res: Character) => res.data.results ) )
     .subscribe(

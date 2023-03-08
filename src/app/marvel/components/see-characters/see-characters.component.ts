@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, map, Subscription } from 'rxjs';
+import { switchMap, map, Subscription, Observable, Subscribable } from 'rxjs';
 import { MarvelService } from '../../services/marvel.service';
 import { ResultCharacter, Character } from '../../interfaces/characters.interface';
 import { Store } from '@ngrx/store';
