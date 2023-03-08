@@ -6,9 +6,10 @@ import { Store } from '@ngrx/store';
 import { ResultComic } from '../../interfaces/comics.interface';
 import { Subscription, map, switchMap } from 'rxjs';
 import { ApiResponse } from '../../interfaces/api-response.interface';
-import { loadComicsSuccess, loadStoriesSuccess } from '../../state/actions/character.actions';
+import { loadCharactersSuccess, loadComicsSuccess, loadStoriesSuccess } from '../../state/actions/character.actions';
 import { Formats } from '../../components/comics/formats-comics';
 import { ResultStory } from '../../interfaces/stories.interface';
+import { ResultCharacter } from '../../interfaces/characters.interface';
 
 @Component({
   selector: 'app-detailed',
@@ -23,6 +24,7 @@ export class DetailedComponent {
 
   comics: ResultComic[] = [];
   stories: ResultStory[] = [];
+  character: ResultCharacter[] = [];
   formats: string[] = Object.values(Formats);
   formatActive!: string;
   subscription: Subscription = new Subscription();
@@ -30,6 +32,7 @@ export class DetailedComponent {
   ngOnInit(): void {
     this.getComics();
     this.getStories();
+    this.seeCharacter();
   }
 
   getComics(): void {
@@ -74,6 +77,22 @@ export class DetailedComponent {
         this.stories = response;
         this.store.dispatch(loadStoriesSuccess({ stories: response }));
       }
+    );
+  }
+
+  seeCharacter() {
+    this.subscription.add( 
+      this.activatedRoute.params
+      .pipe (
+        switchMap( ({ id }) => this.marvelService.getCharacter(id) ),
+        map( ( res: any ) => res.data.results )
+      )
+      .subscribe(
+        ( response: ResultCharacter[] ) => {
+          this.character = response;
+          this.store.dispatch(loadCharactersSuccess({ characters: response }));
+        }
+      )
     );
   }
 

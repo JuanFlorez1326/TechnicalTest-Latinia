@@ -1,22 +1,13 @@
-<div>
-    <app-see-characters>
-    </app-see-characters><br>
+<div [routerLink]="['/marvel']">
+    <app-search-results></app-search-results><br>
 </div>
-<div>
-    <mat-divider></mat-divider>
-</div>
-<div>
-    <app-stories
-        [stories]="stories"
-    ></app-stories>
-</div>
-<div>
-    <mat-divider></mat-divider><br>
-</div>
-<div>
-    <app-comics
-        [comics]="comics"
-        [formats]="formats"
-        (filterByFormat)="filterByFormat($event)"
-    ></app-comics>
-</div>
+<mat-divider></mat-divider>
+
+<app-stories [stories]="stories"></app-stories>
+<mat-divider></mat-divider><br>
+
+<app-comics
+    [comics]="comics"
+    [formats]="formats"
+    (filterByFormat)="filterByFormat($event)"
+></app-comics>

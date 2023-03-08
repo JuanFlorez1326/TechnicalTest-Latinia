@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { HomeComponent } from './containers/home/home.component';
-import { SeeCharactersComponent } from './components/see-characters/see-characters.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -19,7 +18,6 @@ import { TableCharactersComponent } from './components/table-characters/table-ch
     SearchInputComponent,
     SearchResultsComponent,
     HomeComponent,
-    SeeCharactersComponent,
     ComicsComponent,
     StoriesComponent,
     DetailedComponent,
