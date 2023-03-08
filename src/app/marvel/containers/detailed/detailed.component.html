@@ -2,5 +2,9 @@
     <app-see-characters></app-see-characters>
 </div>
 <div>
-    <app-comics></app-comics>
+    <app-comics
+        [comics]="comics"
+        [formats]="formats"
+        (filterByFormat)="filterByFormat($event)"
+    ></app-comics>
 </div>
