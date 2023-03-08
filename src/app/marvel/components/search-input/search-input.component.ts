@@ -41,7 +41,7 @@ export class SearchInputComponent implements OnInit  {
     
     this.characters$ = this.store.select(selectCharacters);
 
-    this.marvelService.getCharacters()
+    this.marvelService.getAllCharacters()
     .pipe< ResultCharacter[] >  ( map( (res: Character) => res.data.results ) )
     .subscribe(
       ( response: ResultCharacter[] ) => {
