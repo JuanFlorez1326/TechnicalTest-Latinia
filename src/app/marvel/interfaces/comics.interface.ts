@@ -1,21 +1,3 @@
-export interface Comic {
-    code:            number;
-    status:          string;
-    copyright:       string;
-    attributionText: string;
-    attributionHTML: string;
-    etag:            string;
-    data:            Data;
-}
-
-export interface Data {
-    offset:  number;
-    limit:   number;
-    total:   number;
-    count:   number;
-    results: ResultComic[];
-}
-
 export interface ResultComic {
     id:                 number;
     digitalId:          number;

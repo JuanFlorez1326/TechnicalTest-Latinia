@@ -13,7 +13,7 @@
             mat-button color="warn"
             *ngFor="let item of formats"
             class="bnt-filter"
-            (click)="filterByFormat( item )"
+            (click)="emitFormat(item)"
         >
             {{ item | titlecase }}
         </button>

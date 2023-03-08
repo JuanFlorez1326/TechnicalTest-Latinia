@@ -1,21 +1,3 @@
-export interface Character {
-    code:            number;
-    status:          string;
-    copyright:       string;
-    attributionText: string;
-    attributionHTML: string;
-    etag:            string;
-    data:            Data;
-}
-
-export interface Data {
-    offset:  number;
-    limit:   number;
-    total:   number;
-    count:   number;
-    results: ResultCharacter[];
-}
-
 export interface ResultCharacter {
     id:          number;
     name:        string;

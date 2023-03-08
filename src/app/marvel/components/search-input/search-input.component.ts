@@ -3,7 +3,7 @@ import { Observable, Subscription, map } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { MarvelService } from '../../services/marvel.service';
-import { Character, ResultCharacter } from '../../interfaces/characters.interface';
+import { ResultCharacter } from '../../interfaces/characters.interface';
 import { loadCharactersSuccess } from '../../state/actions/character.actions';
 import { CharactersState } from '../../state/character.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -42,10 +42,10 @@ export class SearchInputComponent implements OnInit  {
     this.characters$ = this.store.select(selectCharacters);
 
     this.marvelService.getAllCharacters()
-    .pipe< ResultCharacter[] >  ( map( (res: Character) => res.data.results ) )
+    .pipe< ResultCharacter[] > ( map( (res: any ) => res.data.results ) )
     .subscribe(
-      ( response: ResultCharacter[] ) => {
-        this.store.dispatch(loadCharactersSuccess({ characters: response }));
+      ( characters: ResultCharacter[] ) => {
+        this.store.dispatch(loadCharactersSuccess({ characters: characters }));
       }
     );
   }
@@ -76,7 +76,7 @@ export class SearchInputComponent implements OnInit  {
 
   searchCharacters(): void {
     this.marvelService.searchCharacter(this.nameStartsWith, this.limit)
-    .pipe< ResultCharacter[] > ( map( (res: Character) => res.data.results ) )
+    .pipe< ResultCharacter[] > ( map( (res: any ) => res.data.results ) )
     .subscribe(
       ( characters: ResultCharacter[] ) => {
         this.store.dispatch(loadCharactersSuccess({ characters: characters }));
