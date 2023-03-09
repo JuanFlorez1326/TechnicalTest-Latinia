@@ -85,11 +85,7 @@ export class SearchInputComponent implements OnInit  {
   }
 
   showTableCharacters(): void {
-    if(this.showTable) {
-      this.showTable = false;
-    } else {
-      this.showTable = true;
-    }
+    this.showTable ? this.showTable = false : this.showTable = true;
   }
 
   ngOnDestroy(): void {
