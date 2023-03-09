@@ -1,6 +1,7 @@
-import { ResultCharacter } from "./characters.interface";
-import { ResultComic } from "./comics.interface";
-import { ResultStory } from "./stories.interface";
+import { ResultCharacter } from "../../interfaces/characters.interface";
+import { ResultComic } from "../../interfaces/comics.interface";
+import { ResultStory } from "../../interfaces/stories.interface";
+
 
 export interface CharacterState {
     characters: Array<ResultCharacter>;

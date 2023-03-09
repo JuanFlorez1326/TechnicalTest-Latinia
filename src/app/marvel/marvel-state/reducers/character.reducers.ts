@@ -1,13 +1,13 @@
 import { createReducer, on } from '@ngrx/store';
-import { CharacterState, ComicState, StoryState } from '../../interfaces/characters.state';
+import { CharacterState, ComicState, StoryState } from '../interfaces/characters.state';
 import { loadCharactersSuccess, loadComicsSuccess, loadStoriesSuccess } from '../actions/character.actions';
 
-export const initialState: CharacterState = { characters: [] };
+export const initialCharacterState: CharacterState = { characters: [] };
 export const initialComicState: ComicState = { comics: [] };
 export const initialStoryState: StoryState = { stories: [] };
 
 export const characterReducer = createReducer(
-    initialState,
+    initialCharacterState,
     on( loadCharactersSuccess, ( state, { characters } ) => {
         return { ...state, characters: [ ...characters ] };
     })

@@ -9,7 +9,7 @@ import { MarvelModule } from './marvel/marvel.module';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { CHARACTER_REDUCERS } from './marvel/state/character.state';
+import { CHARACTER_REDUCERS } from './marvel/marvel-state/character.state';
 import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({

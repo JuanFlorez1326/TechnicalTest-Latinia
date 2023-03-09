@@ -4,10 +4,10 @@ import { Store } from '@ngrx/store';
 
 import { MarvelService } from '../../services/marvel.service';
 import { ResultCharacter } from '../../interfaces/characters.interface';
-import { loadCharactersSuccess } from '../../state/actions/character.actions';
-import { CharactersState } from '../../state/character.state';
+import { loadCharactersSuccess } from '../../marvel-state/actions/character.actions';
+import { MarvelState } from '../../marvel-state/character.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { selectCharacters } from '../../state/selectors/character.selectors';
+import { selectCharacters } from '../../marvel-state/selectors/character.selectors';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit  {
 
   constructor(
     private readonly marvelService: MarvelService,
-    private readonly store: Store<CharactersState>,
+    private readonly store: Store<MarvelState>,
     private readonly formBuilder: FormBuilder
   ) {
     this.buildForm();

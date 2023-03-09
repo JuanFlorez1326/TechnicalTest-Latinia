@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { MarvelService } from '../../services/marvel.service';
 import { ActivatedRoute } from '@angular/router';
-import { CharactersState } from '../../state/character.state';
+import { MarvelState } from '../../marvel-state/character.state';
 import { Store } from '@ngrx/store';
 import { ResultComic } from '../../interfaces/comics.interface';
 import { Subscription, map, switchMap } from 'rxjs';
 import { ApiResponse } from '../../interfaces/api-response.interface';
-import { loadCharactersSuccess, loadComicsSuccess, loadStoriesSuccess } from '../../state/actions/character.actions';
+import { loadCharactersSuccess, loadComicsSuccess, loadStoriesSuccess } from '../../marvel-state/actions/character.actions';
 import { Formats } from '../../components/comics/formats-comics';
 import { ResultStory } from '../../interfaces/stories.interface';
 import { ResultCharacter } from '../../interfaces/characters.interface';
@@ -19,7 +19,7 @@ export class DetailedComponent {
   constructor(
     private readonly marvelService: MarvelService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly store: Store<CharactersState>
+    private readonly store: Store<MarvelState>
   ) { }
 
   comics: ResultComic[] = [];
