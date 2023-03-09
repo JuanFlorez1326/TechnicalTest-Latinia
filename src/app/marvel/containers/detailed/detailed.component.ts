@@ -36,47 +36,53 @@ export class DetailedComponent {
   }
 
   getComics(): void {
-    this.activatedRoute.params
-    .pipe< ApiResponse, ResultComic[] > (
-      switchMap( ({ id }) => this.marvelService.getComicsById( id )),
-      map( ( res: any ) => res.data.results )
-    )
-    .subscribe(
-      ( response: ResultComic[] ) => {
-        this.comics = response;
-        this.store.dispatch(loadComicsSuccess({ comics: response }));
-      }
+    this.subscription.add( 
+      this.activatedRoute.params
+      .pipe< ApiResponse, ResultComic[] > (
+        switchMap( ({ id }) => this.marvelService.getComicsById( id )),
+        map( ( res: any ) => res.data.results )
+      )
+      .subscribe(
+        ( response: ResultComic[] ) => {
+          this.comics = response;
+          this.store.dispatch(loadComicsSuccess({ comics: response }));
+        }
+      )
     );
   }
 
   filterByFormat( format: string ): void {
     if ( format === this.formatActive ) { return; }
     this.formatActive = format;
-
-    this.activatedRoute.params
-    .pipe< ApiResponse, ResultComic[] > (
-      switchMap( ({ id }) => this.marvelService.getComicsById( id, { format } )),
-      map( ( res: any ) => res.data.results )
-    )
-    .subscribe(
-      ( response: ResultComic[] ) => {
-        this.comics = response;
-        this.store.dispatch(loadComicsSuccess({ comics: response })); 
-      }
+    
+    this.subscription.add( 
+      this.activatedRoute.params
+      .pipe< ApiResponse, ResultComic[] > (
+        switchMap( ({ id }) => this.marvelService.getComicsById( id, { format } )),
+        map( ( res: any ) => res.data.results )
+      )
+      .subscribe(
+        ( response: ResultComic[] ) => {
+          this.comics = response;
+          this.store.dispatch(loadComicsSuccess({ comics: response })); 
+        }
+      )
     );
   }
 
   getStories(): void {
-    this.activatedRoute.params
-    .pipe< ApiResponse, ResultStory[] > (
-      switchMap( ({ id }) => this.marvelService.getStoriesById( id )),
-      map( ( res: any ) => res.data.results )
-    )
-    .subscribe(
-      ( response: ResultStory[] ) => {
-        this.stories = response;
-        this.store.dispatch(loadStoriesSuccess({ stories: response }));
-      }
+    this.subscription.add( 
+      this.activatedRoute.params
+      .pipe< ApiResponse, ResultStory[] > (
+        switchMap( ({ id }) => this.marvelService.getStoriesById( id )),
+        map( ( res: any ) => res.data.results )
+      )
+      .subscribe(
+        ( response: ResultStory[] ) => {
+          this.stories = response;
+          this.store.dispatch(loadStoriesSuccess({ stories: response }));
+        }
+      )
     );
   }
 

@@ -1,3 +1,67 @@
-<div>
-    <app-search-input></app-search-input>
+<h1>Character finder</h1>
+<mat-divider></mat-divider><br>
+
+<form 
+    [formGroup]="searchForm" 
+    class="container-input"
+    (input)="saveForm(); $event.preventDefault();"
+>
+    <mat-form-field class="search-input">
+        <mat-label>
+            Character
+        </mat-label>
+        <input
+            type="text"
+            placeholder="Example: Thor"
+            matInput
+            formControlName="nameStartsWith"
+        >
+        <div
+            *ngIf="
+                searchForm.get('nameStartsWith')?.invalid && 
+                searchForm.get('nameStartsWith')?.touched
+            "
+        >
+            <small>Enter a valid character.</small>
+        </div>
+    </mat-form-field>
+
+    <mat-form-field class="search-input">
+        <mat-label>
+            Limit
+        </mat-label>
+        <input
+            type="number"
+            placeholder="Example: 2"
+            matInput
+            formControlName="limit"
+        >
+        <div
+            *ngIf="
+                searchForm.get('limit')?.invalid && 
+                searchForm.get('limit')?.touched
+            "
+        >
+            <small>The limit must be between 1 and 10.</small>
+        </div>
+    </mat-form-field>
+
+    <div class="container-btn-search">
+        <button color="link" mat-fab enabled (click)="showTable = !showTable">
+          <mat-icon>sync</mat-icon>
+        </button>
+    </div>
+</form>
+<mat-divider></mat-divider><br>
+
+<div *ngIf="showTable">
+    <app-search-results
+        [card-characters]="characters$"
+    ></app-search-results>
+</div>
+
+<div *ngIf="!showTable">
+    <app-table-characters
+        [table-characters]="characters$"
+    ></app-table-characters>
 </div>
