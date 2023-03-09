@@ -1,10 +1,10 @@
 import { createSelector } from '@ngrx/store';
-import { CharacterState, ComicState, StoryState } from '../../interfaces/characters.state';
-import { CharactersState } from '../character.state';
+import { CharacterState, ComicState, StoryState } from '../interfaces/characters.state';
+import { MarvelState } from '../character.state';
 
-export const selectCharacterFeature = ( state: CharactersState ) => state.character;
-export const selectComicFeature = ( state: CharactersState ) => state.comic;
-export const selectStoryFeature = ( state: CharactersState ) => state.story;
+export const selectCharacterFeature = ( state: MarvelState ) => state.character;
+export const selectComicFeature = ( state: MarvelState ) => state.comic;
+export const selectStoryFeature = ( state: MarvelState ) => state.story;
 
 export const selectCharacters = createSelector(
     selectCharacterFeature,

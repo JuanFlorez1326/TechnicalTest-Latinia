@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { CharactersState } from '../../state/character.state';
-import { selectCharacters } from '../../state/selectors/character.selectors';
+import { MarvelState } from '../../marvel-state/character.state';
+import { selectCharacters } from '../../marvel-state/selectors/character.selectors';
 
 @Component({
   selector: 'app-search-results',
@@ -10,13 +10,7 @@ import { selectCharacters } from '../../state/selectors/character.selectors';
 })
 export class SearchResultsComponent implements OnInit {
 
-  constructor(
-    private readonly store: Store<CharactersState>
-  ) { }
-
+  constructor( private readonly store: Store<MarvelState>) {}
   @Input('card-characters') characters$!: any;
-  
-  ngOnInit(): void {
-    this.characters$ = this.store.select(selectCharacters);
-  }
+  ngOnInit(): void { this.characters$ = this.store.select(selectCharacters) }
 }
