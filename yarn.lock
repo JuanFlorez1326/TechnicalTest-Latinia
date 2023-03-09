@@ -2038,6 +2038,13 @@
   dependencies:
     "tslib" "^1.10.0"
 
+"@ngrx/effects@^15.3.0":
+  "integrity" "sha512-L+Ie4XFrzYBJOV7hNQvR5hUvG1PSCDd6niwOOJg5nm9zEjSnAxveJ/a3B52pRwge6EYOnrQne97jyArxOzPCJA=="
+  "resolved" "https://registry.npmjs.org/@ngrx/effects/-/effects-15.3.0.tgz"
+  "version" "15.3.0"
+  dependencies:
+    "tslib" "^2.0.0"
+
 "@ngrx/store-devtools@^15.3.0":
   "integrity" "sha512-o39T11T994j5XzwiNquhRHVQiFYlOg1PJWmV++LdIaXD0zYovc9lzNDnZJy04mt9XPTDPu8QmcmzV44zUtY4vg=="
   "resolved" "https://registry.npmjs.org/@ngrx/store-devtools/-/store-devtools-15.3.0.tgz"

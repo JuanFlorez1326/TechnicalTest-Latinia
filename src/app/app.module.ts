@@ -10,6 +10,7 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { CHARACTER_REDUCERS } from './marvel/state/character.state';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CHARACTER_REDUCERS } from './marvel/state/character.state';
     ),
     StoreDevtoolsModule.instrument({ 
       name: 'Marvel App' 
-    })
+    }),
+    EffectsModule.forRoot([])
   ],
   bootstrap: [
     AppComponent

@@ -1,6 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Observable, Subscribable } from 'rxjs';
-import { ResultCharacter } from '../../interfaces/characters.interface';
 import { Store } from '@ngrx/store';
 import { CharactersState } from '../../state/character.state';
 import { selectCharacters } from '../../state/selectors/character.selectors';

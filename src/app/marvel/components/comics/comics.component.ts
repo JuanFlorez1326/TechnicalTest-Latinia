@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ResultComic } from '../../interfaces/comics.interface';
 
-
 @Component({
   selector: 'app-comics',
   templateUrl: './comics.component.html',
