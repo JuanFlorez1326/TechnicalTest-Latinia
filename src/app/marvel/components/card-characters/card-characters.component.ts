@@ -5,10 +5,10 @@ import { selectCharacters } from '../../marvel-state/selectors/character.selecto
 
 @Component({
   selector: 'app-search-results',
-  templateUrl: './search-results.component.html',
-  styleUrls: ['./search-results.component.scss']
+  templateUrl: './card-characters.component.html',
+  styleUrls: ['./card-characters.component.scss']
 })
-export class SearchResultsComponent implements OnInit {
+export class CardCharactersComponent implements OnInit {
 
   constructor( private readonly store: Store<MarvelState>) {}
   @Input('card-characters') characters$!: any;

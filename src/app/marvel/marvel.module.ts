@@ -9,12 +9,12 @@ import { DetailedComponent } from './containers/detailed/detailed.component';
 import { HomeComponent } from './containers/home/home.component';
 import { MarvelRoutingModule } from './marvel-routing.module';
 import { StoriesComponent } from './components/stories/stories.component';
-import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { CardCharactersComponent } from './components/card-characters/card-characters.component';
 import { TableCharactersComponent } from './components/table-characters/table-characters.component';
 
 @NgModule({
   declarations: [
-    SearchResultsComponent,
+    CardCharactersComponent,
     ComicsComponent,
     StoriesComponent,
     DetailedComponent,
