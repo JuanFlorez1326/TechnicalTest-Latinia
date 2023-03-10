@@ -1,24 +1,24 @@
 import { Action } from '@ngrx/store';
 import { ResultComic } from '../../interfaces/comics.interface';
+import { ResultCharacter } from '../../interfaces/characters.interface';
+import { ResultStory } from '../../interfaces/stories.interface';
 
 
-export enum CharacterActionTypes {
-    LoadComics = '[Character] Load All Comics',
-    LoadComicsSuccess = '[Character] Load All Comics Success',
-    LoadComicsFailure = '[Character] Load All Comics Failure',
-}
-
-export class LoadComics implements Action {
-    readonly type = CharacterActionTypes.LoadComics;
-    constructor( public payload: { characterId: string } ) {}
+export enum ComicsActionTypes {
+    LoadComicsSuccess = '[Comics] Load Comics Success',
+    LoadComicsFailure = '[Comics] Load Comics Failure'
 }
 
 export class LoadComicsSuccess implements Action {
-    readonly type = CharacterActionTypes.LoadComicsSuccess;
-    constructor( public payload: { comics: ResultComic[] } ) {}
+    readonly type = ComicsActionTypes.LoadComicsSuccess;
+    constructor( public payload: { comics: ResultComic[] | ResultCharacter[] | ResultStory[] } ) {}
 }
 
 export class LoadComicsFailure implements Action {
-    readonly type = CharacterActionTypes.LoadComicsFailure;
+    readonly type = ComicsActionTypes.LoadComicsFailure;
     constructor( public payload: { error: string } ) {}
 }
+
+export type ComicsActions = 
+    | LoadComicsSuccess 
+    | LoadComicsFailure;

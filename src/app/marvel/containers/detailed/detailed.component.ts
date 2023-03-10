@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
-import { MarvelService } from '../../services/marvel.service';
 import { ActivatedRoute } from '@angular/router';
-import { MarvelState } from '../../marvel-state/character.state';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { ResultComic } from '../../interfaces/comics.interface';
 import { Subscription, map, switchMap } from 'rxjs';
+
 import { ApiResponse } from '../../interfaces/api-response.interface';
 import { loadCharactersSuccess, loadComicsSuccess, loadStoriesSuccess } from '../../marvel-state/actions/character.actions';
 import { Formats } from '../../components/comics/formats-comics';
-import { ResultStory } from '../../interfaces/stories.interface';
+import { MarvelService } from '../../services/marvel.service';
+import { MarvelState } from '../../marvel-state/character.state';
+import { ResultComic } from '../../interfaces/comics.interface';
 import { ResultCharacter } from '../../interfaces/characters.interface';
+import { ResultStory } from '../../interfaces/stories.interface';
 
 @Component({
   selector: 'app-detailed',
