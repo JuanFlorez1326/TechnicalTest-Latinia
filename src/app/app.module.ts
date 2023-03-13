@@ -10,8 +10,6 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
-import { CHARACTER_REDUCERS } from './marvel/marvel-state/character.state';
-import { CharacterEffects } from './marvel/marvel-state/effects/character.effects';
 
 @NgModule({
   declarations: [
@@ -25,13 +23,11 @@ import { CharacterEffects } from './marvel/marvel-state/effects/character.effect
     SharedModule,
     BrowserAnimationsModule,
     StoreModule.forRoot(
-      CHARACTER_REDUCERS
     ),
     StoreDevtoolsModule.instrument({ 
       name: 'Marvel App' 
     }),
     EffectsModule.forRoot([
-      CharacterEffects
     ])
   ],
   bootstrap: [

@@ -2,7 +2,7 @@
     <div 
         [routerLink]="['/marvel/character', character.id]" 
         class="card" 
-        *ngFor="let character of characters$ | async"
+        *ngFor="let character of characters$"
     >
         <div class="img-card">
             <img class="image" src="{{character.thumbnail.path}}.{{character.thumbnail.extension}}" [alt]="character.name">

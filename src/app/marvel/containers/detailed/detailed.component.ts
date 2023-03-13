@@ -1,13 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Subscription, map, switchMap } from 'rxjs';
 
 import { ApiResponse } from '../../interfaces/api-response.interface';
-import { loadCharactersSuccess, loadComicsSuccess, loadStoriesSuccess } from '../../marvel-state/actions/character.actions';
 import { Formats } from '../../components/comics/formats-comics';
 import { MarvelService } from '../../services/marvel.service';
-import { MarvelState } from '../../marvel-state/character.state';
 import { ResultComic } from '../../interfaces/comics.interface';
 import { ResultCharacter } from '../../interfaces/characters.interface';
 import { ResultStory } from '../../interfaces/stories.interface';
@@ -20,12 +17,11 @@ export class DetailedComponent {
   constructor(
     private readonly marvelService: MarvelService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly store: Store<MarvelState>
   ) { }
 
   comics: ResultComic[] = [];
   stories: ResultStory[] = [];
-  character: ResultCharacter[] = [];
+  characters$: ResultCharacter[] = [];
   formats: string[] = Object.values(Formats);
   formatActive!: string;
   subscription: Subscription = new Subscription();
@@ -93,7 +89,7 @@ export class DetailedComponent {
       )
       .subscribe(
         ( response: ResultCharacter[] ) => {
-          this.store.dispatch(loadCharactersSuccess({ characters: response }));
+          this.characters$ = response;
         }
       )
     );

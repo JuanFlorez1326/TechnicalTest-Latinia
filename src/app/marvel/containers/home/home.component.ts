@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription, map } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Subscription, map } from 'rxjs';
 
 import { MarvelService } from '../../services/marvel.service';
 import { ResultCharacter } from '../../interfaces/characters.interface';
-import { loadCharactersSuccess } from '../../marvel-state/actions/character.actions';
-import { MarvelState } from '../../marvel-state/character.state';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { selectCharacters } from '../../marvel-state/selectors/character.selectors';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +14,6 @@ export class HomeComponent implements OnInit  {
 
   constructor(
     private readonly marvelService: MarvelService,
-    private readonly store: Store<MarvelState>,
     private readonly formBuilder: FormBuilder
   ) {
     this.buildForm();
@@ -34,10 +29,9 @@ export class HomeComponent implements OnInit  {
   showTable: boolean =  true ? true : false;
   subscription: Subscription = new Subscription();
   alphanumericRegex: RegExp = /^[a-zA-Z0-9- .()]*$/;
-  characters$: Observable<any> = new Observable();
+  characters$: ResultCharacter[] = [];
 
   ngOnInit(): void {
-    this.characters$ = this.store.select(selectCharacters);
     this.allCharacters();
   }
 
@@ -63,7 +57,7 @@ export class HomeComponent implements OnInit  {
       .pipe< ResultCharacter[] > ( map( (res: any ) => res.data.results ) )
       .subscribe(
         ( characters: ResultCharacter[] ) => {
-          this.store.dispatch(loadCharactersSuccess({ characters: characters }));
+          this.characters$ = characters;
         }
       )
     );
@@ -75,7 +69,7 @@ export class HomeComponent implements OnInit  {
       .pipe< ResultCharacter[] > ( map( (res: any ) => res.data.results ) )
       .subscribe(
         ( characters: ResultCharacter[] ) => {
-          this.store.dispatch(loadCharactersSuccess({ characters: characters }));
+          this.characters$ = characters;
         }
       )
     );
