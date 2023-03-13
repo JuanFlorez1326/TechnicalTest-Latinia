@@ -46,7 +46,6 @@ export class DetailedComponent {
       .subscribe(
         ( response: ResultComic[] ) => {
           this.comics = response;
-          this.store.dispatch(loadComicsSuccess({ comics: response }));
         }
       )
     );
@@ -65,7 +64,6 @@ export class DetailedComponent {
       .subscribe(
         ( response: ResultComic[] ) => {
           this.comics = response;
-          this.store.dispatch(loadComicsSuccess({ comics: response })); 
         }
       )
     );
@@ -81,7 +79,6 @@ export class DetailedComponent {
       .subscribe(
         ( response: ResultStory[] ) => {
           this.stories = response;
-          this.store.dispatch(loadStoriesSuccess({ stories: response }));
         }
       )
     );
@@ -96,7 +93,6 @@ export class DetailedComponent {
       )
       .subscribe(
         ( response: ResultCharacter[] ) => {
-          this.character = response;
           this.store.dispatch(loadCharactersSuccess({ characters: response }));
         }
       )
